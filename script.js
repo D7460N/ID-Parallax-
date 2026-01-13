@@ -13,11 +13,11 @@
   };
   
   // Mobile detection for offset adjustment
+  const mobileQuery = window.matchMedia('(max-width: 768px)');
   let foregroundOffset = calculateForegroundOffset();
   
   function calculateForegroundOffset() {
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    return isMobile ? window.innerHeight * 0.6 : window.innerHeight * 0.5;
+    return mobileQuery.matches ? window.innerHeight * 0.6 : window.innerHeight * 0.5;
   }
   
   function updateParallax() {
