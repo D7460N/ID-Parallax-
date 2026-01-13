@@ -13,8 +13,12 @@
   };
   
   // Mobile detection for offset adjustment
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  const foregroundOffset = isMobile ? window.innerHeight * 0.6 : window.innerHeight * 0.5;
+  let foregroundOffset = calculateForegroundOffset();
+  
+  function calculateForegroundOffset() {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    return isMobile ? window.innerHeight * 0.6 : window.innerHeight * 0.5;
+  }
   
   function updateParallax() {
     const scrollY = window.scrollY;
@@ -59,10 +63,8 @@
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function() {
-      const newIsMobile = window.matchMedia('(max-width: 768px)').matches;
-      if (newIsMobile !== isMobile) {
-        window.location.reload();
-      }
+      foregroundOffset = calculateForegroundOffset();
+      updateParallax();
     }, 250);
   }, { passive: true });
 })();
