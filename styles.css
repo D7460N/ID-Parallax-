@@ -1,0 +1,288 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+  min-height: 200vh;
+  background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 100%);
+  color: #f5f5f5;
+}
+
+main {
+  display: grid;
+  grid-template-rows: 100vh auto;
+  position: relative;
+}
+
+/* Hero section with parallax layers */
+section[aria-label="Ballet parallax hero"] {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas: "parallax";
+}
+
+/* All parallax layers positioned in same grid area */
+section[aria-label="Ballet parallax hero"] > article {
+  grid-area: parallax;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  will-change: transform;
+}
+
+/* Background layer - Ballet studio at 0.3x speed */
+article[ref="background-layer"] {
+  display: grid;
+  grid-template-rows: 20% 1fr 30%;
+  background: linear-gradient(to bottom, 
+    #f5e6d3 0%, 
+    #e8d5c0 50%, 
+    #8b7355 100%);
+  z-index: 1;
+}
+
+article[ref="background-layer"] header {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(to bottom, #d4c5b0, #c9b89d);
+  border-bottom: 0.5rem solid #8b7355;
+}
+
+article[ref="background-layer"] h2 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  color: #5a4a3a;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* Wall with mirrors effect */
+article[ref="background-layer"] aside:nth-of-type(1) {
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      #f5e6d3 0px,
+      #f5e6d3 20%,
+      #fff 20%,
+      #fff 22%,
+      #f5e6d3 22%,
+      #f5e6d3 40%
+    ),
+    linear-gradient(to bottom, #e8d5c0, #d4c5b0);
+  border-top: 0.3rem solid #8b7355;
+  border-bottom: 0.3rem solid #8b7355;
+}
+
+/* Ballet barre */
+article[ref="background-layer"] aside:nth-of-type(2) {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 100%;
+  height: 0.5rem;
+  background: linear-gradient(to bottom, #5a4a3a, #3a2a1a);
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
+}
+
+/* Studio floor */
+article[ref="background-layer"] aside:nth-of-type(3) {
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      #b8976f 0px,
+      #b8976f 10%,
+      #a8866f 10%,
+      #a8866f 10.2%,
+      #b8976f 10.2%
+    );
+  border-top: 0.5rem solid #8b7355;
+}
+
+/* Middle layer - Ballerinas at 0.4x speed */
+article[ref="middle-layer"] {
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+article[ref="middle-layer"] figure {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2rem, 10vw, 8rem);
+  width: 90%;
+  max-width: 60rem;
+}
+
+article[ref="middle-layer"] figure > div {
+  aspect-ratio: 1 / 2;
+  background: 
+    radial-gradient(ellipse at 50% 20%, #ffe5e5 0%, transparent 40%),
+    radial-gradient(ellipse at 30% 60%, #ffd4d4 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, #ffd4d4 0%, transparent 50%),
+    linear-gradient(to bottom, 
+      transparent 0%,
+      transparent 15%,
+      #ffc0cb 15%,
+      #ffc0cb 25%,
+      transparent 25%,
+      transparent 40%,
+      #ff69b4 40%,
+      #ff69b4 90%,
+      transparent 90%
+    );
+  animation: dance 3s ease-in-out infinite;
+}
+
+article[ref="middle-layer"] figure > div:nth-child(2) {
+  animation-delay: 1s;
+}
+
+article[ref="middle-layer"] figure > div:nth-child(3) {
+  animation-delay: 2s;
+}
+
+@keyframes dance {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-1rem) rotate(-5deg); }
+  75% { transform: translateY(-1rem) rotate(5deg); }
+}
+
+/* Foreground layer - Logo at 0.5x speed, entering from below */
+article[ref="foreground-layer"] {
+  display: grid;
+  place-items: end center;
+  z-index: 3;
+  transform: translateY(50vh);
+}
+
+article[ref="foreground-layer"] figure {
+  width: clamp(10rem, 30vw, 20rem);
+  margin-bottom: 2rem;
+}
+
+article[ref="foreground-layer"] svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0.5rem 2rem rgba(0, 0, 0, 0.5));
+}
+
+article[ref="foreground-layer"] circle {
+  fill: none;
+  stroke: #ff69b4;
+  stroke-width: 4;
+  stroke-dasharray: 565;
+  stroke-dashoffset: 565;
+  animation: draw-circle 2s ease-out forwards;
+}
+
+article[ref="foreground-layer"] text {
+  fill: #ff69b4;
+  font-size: 5rem;
+  font-weight: bold;
+  font-family: serif;
+  opacity: 0;
+  animation: fade-in 1s ease-out 1s forwards;
+}
+
+@keyframes draw-circle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fade-in {
+  to { opacity: 1; }
+}
+
+/* Content section */
+section[aria-label="Content section"] {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  background: linear-gradient(to bottom, #16213e, #0f3460);
+}
+
+section[aria-label="Content section"] article {
+  max-width: 50rem;
+  text-align: center;
+}
+
+section[aria-label="Content section"] h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 2rem;
+  color: #ff69b4;
+  text-shadow: 0 0.2rem 1rem rgba(255, 105, 180, 0.5);
+}
+
+section[aria-label="Content section"] p {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: #e0e0e0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  article[ref="background-layer"] h2 {
+    font-size: 1.5rem;
+  }
+  
+  article[ref="middle-layer"] figure {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 15rem;
+  }
+  
+  article[ref="middle-layer"] figure > div {
+    aspect-ratio: 1 / 1.5;
+  }
+  
+  article[ref="foreground-layer"] {
+    transform: translateY(60vh);
+  }
+  
+  article[ref="foreground-layer"] figure {
+    width: 8rem;
+  }
+  
+  section[aria-label="Content section"] {
+    padding: 3rem 1.5rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  article[ref="background-layer"] {
+    background: #fff;
+  }
+  
+  article[ref="foreground-layer"] circle,
+  article[ref="foreground-layer"] text {
+    stroke: #000;
+    fill: #000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  article[ref="background-layer"],
+  article[ref="middle-layer"],
+  article[ref="foreground-layer"] {
+    will-change: auto;
+  }
+}

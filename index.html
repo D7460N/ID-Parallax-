@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Dance - Ballet Parallax</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <section role="region" aria-label="Ballet parallax hero">
+      <article ref="background-layer">
+        <header>
+          <h2>Ballet Studio</h2>
+        </header>
+        <aside aria-label="Studio wall with mirrors"></aside>
+        <aside aria-label="Ballet barre"></aside>
+        <aside aria-label="Studio floor"></aside>
+      </article>
+      
+      <article ref="middle-layer">
+        <figure aria-label="Ballerinas dancing">
+          <div role="img" aria-label="First ballerina"></div>
+          <div role="img" aria-label="Second ballerina"></div>
+          <div role="img" aria-label="Third ballerina"></div>
+        </figure>
+      </article>
+      
+      <article ref="foreground-layer">
+        <figure aria-label="International Dance Circle logo">
+          <svg viewBox="0 0 200 200" role="img" aria-label="ID Circle Logo">
+            <circle cx="100" cy="100" r="90" />
+            <text x="100" y="110" text-anchor="middle">ID</text>
+          </svg>
+        </figure>
+      </article>
+    </section>
+    
+    <section role="region" aria-label="Content section">
+      <article>
+        <h1>Welcome to International Dance</h1>
+        <p>Experience the elegance and grace of ballet through our immersive parallax design.</p>
+        <p>Scroll to see the layers move at different speeds, creating depth and dimension.</p>
+      </article>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
